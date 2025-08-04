@@ -1,0 +1,41 @@
+---
+title: "Lab 1 Review"
+author: "George I. Hagstrom"
+format: revealjs
+---
+
+## Richardson Iteration
+
+- Consider Problem 3(a), showing that the Pseudoinverse is a fixed point of the Richardson Iteration algorithm:
+
+$$
+x^{(k+1)} = x^{(k)} - \mu A^{T}\left(Ax^{(k)} - b \right)
+$$
+
+- Next Step: Substitute $A^{+}b$ for $x^{(x)}$:
+
+$$ x^{(k+1)} = A^{+}b - \mu A^{(T)}\left(AA^{+}b - b\right)$$
+
+
+## Most Common Mistake
+
+- Many of you then concluded:
+
+$$ AA^{+}b - b = 0$$
+
+- Several justification, but:
+
+```{r}
+#| echo: true
+
+A = matrix(rnorm(40),nrow=10,ncol=4)
+b = rnorm(10)
+
+t(A  %*% solve(t(A) %*% A) %*% t(A) %*%  b)
+
+
+```
+
+## Why isn't it true?
+
+- $A^+$ 

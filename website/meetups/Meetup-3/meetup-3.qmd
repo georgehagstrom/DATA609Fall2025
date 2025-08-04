@@ -1,0 +1,431 @@
+---
+title: "DATA 609 Meetup 3"
+author: "George I. Hagstrom"
+format: revealjs
+logo: CUNY_SPS_Logo_Wide.png
+footer: "DATA 609"
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Case Study: Extending Linear Regression
+
+[What are the validity conditions for linear regression?]{style="color:red"}
+
+- Linear Relationship
+- Independent Residuals
+- Normal Residuals
+- ?????
+
+## Case Study: Extending Linear Regression
+
+
+[What are the validity conditions for linear regression?]{style="color:red"}
+
+- Linear Relationship
+- Independent Residuals
+- Normal Residuals
+- [Homoscedasticity i.e. constant variance]{style="color:red"} 
+
+## Case Study: Homoscedasticity
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+x1 = np.linspace(0,1,1000)
+y1 = 3*x1 + np.random.randn(1000)*(x1+0.1) 
+y2 = 3*x1 + np.random.randn(1000)*0.5
+
+plt.subplot(1,2,1)
+plt.scatter(x1,y2,s=0.1)
+plt.title("Homoscedastic")
+plt.subplot(1,2,2)
+plt.scatter(x1,y1,s=0.1)
+plt.title("Heteroscedastic")
+
+plt.show()
+
+
+
+```
+
+## Unequal Variance Common
+
+1. Typical for Variance to be proportional to magnitude in some way
+  - Could try a data transformation, but isn't satisfying
+2. Heterogeneous detectors
+  - Have sensor network with mix of types
+
+
+## Maximum Likelihood {.smaller}
+
+- Consider following statistical model for $y_i$ in terms of measurements $\mathbf{x}_i$:
+$$
+y_i \sim \mathrm{Normal}\left(\mathbf{x}_i^T\mathbf{\theta},\sigma_i\right)
+$$
+- $\sigma_i^2$ is variance of measurement of $y_i$
+- Likelihood:
+$$
+\log p(\mathbf{y}|X,\theta) = \log\left(\Pi_{i=1}^n \frac{1}{2\pi\sigma_i}\exp\left(-\frac{\left(y_i-\mathbf{x}_i^T\mathbf{\theta}\right)^2}{2\sigma_i^2}  \right) \right)
+$$
+
+## Maximum Likelihood {.smaller}
+
+- Consider following statistical model for $y_i$ in terms of measurements $\mathbf{x}_i$:
+$$
+y_i \sim \mathrm{Normal}\left(\mathbf{x}_i^T\mathbf{\theta},\sigma_i\right)
+$$
+- $\sigma_i^2$ is variance of measurement of $y_i$
+- Likelihood:
+$$
+\log p(\mathbf{y}|X,\theta) = -\frac{n}{2} \log(2\pi) - \sum_{i=1}^n\log(\sigma_i) -
+\left\|\mathrm{diag}\left(1/\sigma_i\right)\left( X \mathbf{\theta} - \mathbf{y}\right)\right\|^2
+$$
+
+## Weighted Least Squares {.smaller}
+
+- Maximum Likelihood Estimate for the Unequal Variance Problem is a _Weighted_ Least Squares optimization:
+
+$$
+\min_{\mathbf{\theta}} \|W^{1/2}(X\mathbf{\theta} - \mathbf{y})\|^2
+$$
+
+- Here the matrix $W$ is a diagonal matrix with $\frac{1}{\sigma_i^2}$ on the diagonal entries
+- Large $\sigma_i$ means error of that term is less important
+$$
+X^TWX \mathbf{\theta} = X^TW\mathbf{y}
+$$
+
+## Gauss-Markov Theorem
+
+- Can extend this result to scenario when measurement errors have a given
+covariance matrix $\Gamma$
+- Then $W=\Gamma^{-1}$ and Weighted Least Squares provides maximum likelihood estimate
+- Best Linear Uniased Estimator
+
+## When is WLS useful?
+
+- Sample more of one group than another
+- Errors vary based on detector or value
+- Care about some predictions on some data more than others
+  
+
+
+## Weekly Summary
+
+- Reading: Chapter 13 of VMLS
+- HW 2 Available, due in 2 weeks
+  - Problem 1 and 2 based on this week
+  - Problem 3 next week
+- Will release another `numpy` coding video, lmk if you prefer a different language
+
+
+
+## Data Fitting
+
+- Have some observations $y_i$ and $\mathbf{x}_i$ and want to fit a regression
+- $m$ observations, have $n$ basis functions $f$
+$$
+y_i \sim \mathrm{Normal}\left(\sum_{j=1}^{n} \theta_j f_j(\mathbf{x}_i),\sigma\right)
+$$
+- Normal errors gives justification for least squares 
+
+
+## Data Fitting Solution
+
+Can form matrix $A$:
+$$
+A = \begin{bmatrix}
+f_1(\mathbf{x}_1) & f_2(\mathbf{x}_1) & \cdots & f_n(\mathbf{x}_1) \\
+\vdots & \vdots & \vdots & \vdots \\
+f_1(\mathbf{x}_m) & f_2(\mathbf{x}_m) & \cdots & f_n(\mathbf{x}_m)
+\end{bmatrix}
+$$
+
+- And find:
+$$
+\min_{\theta} \|A\mathbf{\theta} - \mathbf{y}\|^2
+$$
+
+
+## Example: Autoregressive Time Series
+
+- Suppose we have observations $y_t$ and want to predict new $y$ based on 
+previous observations 
+$$
+y_t = \theta_1 y_{t-1} + \theta_2 y_{t-2}+\cdots+\theta_n y_{t-n}
+$$
+- How to write this in our framework?
+
+## Example: Autoregressive Time Series
+
+- Suppose we have observations $y_t$ and want to predict new $y$ based on 
+previous observations 
+$$
+y_t = \theta_1 y_{t-1} + \theta_2 y_{t-2}+\cdots+\theta_n y_{t-n}
+$$
+- How to write this in our framework?
+- Define $\mathbf{x}_i = \begin{bmatrix} y_{t-1} & y_{t-2} & \cdots & y_{t-n} \end{bmatrix}$
+
+
+## Example: Central Park Temperature
+
+- Hourly Central Park Temperature from Jan-March 2023
+
+```{python}
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+central_park = pd.read_csv("central_park_temperature.csv")
+
+plt.plot(central_park["temp"])
+plt.show()
+
+
+```
+
+## How to Predict
+
+- Baseline Mean and Variance:
+  - ${T}_{\mathrm{mean}} = 42.5$, $\sigma_T = 8.57$
+- Guess Temperature from 24 hours before
+  - $\sigma_{lag} = 1.41$
+- How about using the past 8 hours?:
+$$
+T_t = \sum_{i=1}^8 \theta_i T_{t-i}
+$$
+
+
+## Setting up the model
+
+```{python}
+#| echo: true
+
+A = np.array([central_park["temp"].values[i:i+8].T 
+for i in  range(len(central_park)-8)])
+x = central_park["temp"].values[8:]
+theta = np.linalg.lstsq(A,x)[0]
+
+```
+- Slight Improvement $\sigma = 1.25$
+
+## Predictions
+
+```{python}
+
+plt.plot(A @ theta)
+plt.scatter(range(len(x)),x,s=0.5,alpha=0.2)
+plt.title("Autoregressive Model Predictions")
+plt.xlabel("Hour")
+plt.ylabel("Temperature")
+
+```
+
+
+## More Time Series
+
+- Can incorporate trends:
+$$
+T_t = \theta_0(i-i_0) + \sum_{i=1}^8 \theta_i T_{t-i}
+$$
+- Other variables or functions
+$$
+T_t = \theta_{m}\mathrm{Month}(i) + \sum_{i=1}^8 \theta_i T_{t-i}
+$$
+
+
+## Generalization and Validation
+
+- Goal usually isn't to find model with absolute lowest RMS error
+- Instead want a model that predicts well on new data
+- Two goals often in conflict
+
+## Example: Polynomial Interpolation
+
+- Fitting high degree polynomials famously leads to _overfitting_
+$$
+y_i = \sum_{j=1}^n \theta_j x^{j-1}
+$$
+```{python fig.width=6}
+m = 100
+# Generate the test set.
+t = -1 + 2*np.random.random(m)
+y = t**3 - t + 0.4 / (1 + 25*(t)**2) + 0.10*np.random.normal(size = m)
+t_test = -1 + 2*np.random.random(m)
+y_test =  t_test**3 - t_test + 0.4 / (1 + 25*(t_test)**2) + 0.10*np.random.normal(size = m)
+
+N = 30
+error_train = np.zeros(N)
+error_test = np.zeros(N)
+for p in range(1,N+1):
+    A = np.array([t**i for i in range(0,p)]).T
+    theta = np.linalg.lstsq(A,y)[0]
+    error_train[p-1] = np.linalg.norm(A@ theta -y)/np.linalg.norm(y)
+    ATest = np.array([t_test**i for i in range(0,p)]).T
+    error_test[p-1] = np.linalg.norm(ATest @ theta - y_test)/np.linalg.norm(y_test)
+
+#plt.scatter(t,y)
+#plt.title("Training Data")
+#plt.xlabel("x")
+#plt.ylabel("y")
+```
+
+## Fit Results
+
+- Curve develops unnecessary features at higher order
+```{python fig.width=6 fig.asp=0.75}
+
+NVec = np.array([2,5,9,18])
+
+def fit_func(t,theta):
+    N = len(theta)
+    return(sum([t**(i)*theta[i] for i in range(0,N)]))
+
+for iter, p in enumerate(NVec):
+    A = np.array([t**i for i in range(0,p)]).T
+    theta = np.linalg.lstsq(A,y)[0]
+    y_pred = fit_func(np.linspace(-1,1,200),theta)
+    plt.subplot(2,2,iter+1)
+    plt.plot(np.linspace(-1,1,200),y_pred)
+    plt.scatter(t_test,y_test,s=0.3)
+    plt.text(0.5,0.5,"p="+str(p-1))
+
+  
+```
+
+
+## Generalization Error
+
+- At high order, generalization fails
+
+```{python}
+plt.plot(np.arange(N), error_train, 'b-o', label = 'Train')
+plt.plot(np.arange(N), error_test, 'r-x', label = 'Test')
+plt.xlabel('Degree')
+plt.ylabel('Relative RMS error')
+plt.legend()
+plt.show()
+```
+
+## Regularization
+
+- Another way to handle overfitting is with regularization
+- Add term proportional to $\|\mathbf{\theta}\|^2$
+$$
+\min_{\mathbf{\theta}} \|A\mathbf{\theta}-\mathbf{y}\|^2 + \lambda\|\mathbf{\theta}\|^2
+$$
+
+- Use if $A$ is ill-conditioned or many parameters.
+
+
+## Ridge Regression
+
+- Name comes from geometry
+- Consider objective function with a "ridge"
+```{python}
+
+def f(x,y):
+  return np.exp(-(0.01*x**2 + 1.0*y**2))
+
+xx = np.linspace(-2,2,100)
+yy = np.linspace(-2,2,100)
+x1, y1 = np.meshgrid(xx, yy)
+fvals = np.zeros_like(x)
+
+fvals = f(x1,y1)
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111)
+
+ax.contourf(x1,y1,fvals,cmap = "viridis",levels=20)
+```
+
+## Ridge Regression
+
+- Name comes from geometry
+- Regularizer turns ridge to peak
+```{python}
+
+def f(x,y):
+  return np.exp(-(0.51*x**2 + 1.5*y**2))
+
+xx = np.linspace(-2,2,100)
+yy = np.linspace(-2,2,100)
+x1, y1 = np.meshgrid(xx, yy)
+fvals = np.zeros_like(x1)
+
+fvals = f(x1,y1)
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111)
+
+ax.contourf(x1,y1,fvals,cmap = "viridis",levels=20)
+```
+
+
+
+
+## Bayesian Linear Regression
+
+$$
+\mathbf{y} \sim \mathrm{Normal}\left(X\theta,\sigma^2 I\right) \\
+\mathbf{\theta} \sim \mathrm{Normal}\left(0, \frac{1}{\lambda} I\right)
+$$
+
+- $\frac{1}{\lambda}$ is variance of prior distribution on $\theta$
+- $p(\theta|X)$ is normal
+- $E(\theta|X)$ is least squares ridge regression solution
+
+## Ridge Regression Solution
+
+- Equivalent to:
+$$
+\left(A^TA + \lambda I\right)\mathbf{\theta} = A^T\mathbf{y}
+$$
+```{python fig-width=8}
+N = 40
+kVec = np.logspace(-4,-1,100)
+A = np.array([t**i for i in range(0,N)]).T
+
+
+error_train = np.zeros(N)
+error_test = np.zeros(N)
+
+A = np.array([t**i for i in range(0,N)]).T
+ATest = np.array([t_test**i for i in range(0,N)]).T
+error_train = np.zeros(100)
+error_test = np.zeros(100)
+for iter, k in enumerate(kVec):
+    theta = np.linalg.solve((A.T@A+k*np.eye(N)), A.T @ y)
+    error_train[iter] = np.linalg.norm(A@ theta - y)/np.linalg.norm(y)
+    error_test[iter] = np.linalg.norm(ATest @ theta - y_test)/np.linalg.norm(y_test)
+    
+#plt.plot(kVec, error_train, 'b-o', label = 'Train')
+#plt.plot(kVec, error_test, 'r-x', label = 'Test')
+#plt.xlabel('\lambda')
+#plt.ylabel('Relative RMS error')
+#plt.legend()
+#plt.show()
+
+```
+
+
+## Feature Engineering 
+
+- Can use domain knowledge to create custom features in your data
+- New feature vectors: $f_1(\mathbf{x})$, $f_2(\mathbf{x}), \cdots$
+- Standard data transforms, `log`, z-score
+- Thresholding:   $f(x) = \max(0,x)$
+- Domain Knowledge: 
+$$ \mathrm{BMI} =\frac{\left(\mathrm{Weight}\right)}{\left(\mathrm{Height}\right)^2}$$
+
+
+## Thanks!
+
+
+

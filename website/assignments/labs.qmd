@@ -1,0 +1,27 @@
+---
+title: "Labs"
+---
+
+The homework assignments in this course are lab assignments where you will solve the problem using a combination of mathematics and computer code.  
+**Please submit a and either a quarto file or jupyter notebook or other code that generates your homework.** Labs should be submitted on Blackboard.
+
+<col start='1'>
+<li value='1'> <a href='https://htmlpreview.github.io/?https://georgehagstrom.github.io/DATA609Spring2025/assignments/labs/Lab1.html'>Gradient Descent and Least Squares</a> (<a href=https://github.com/georgehagstrom/DATA609Spring2025/blob/main/website/assignments/labs/Lab1.qmd?raw=true'>Download</a>)</li>
+
+<li value='2'> <a href='https://htmlpreview.github.io/?https://georgehagstrom.github.io/DATA609Spring2025/assignments/labs/Lab2.html'>Least Squares Applications</a> (<a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/website/assignments/labs/Lab2.qmd?raw=true'>Download</a>)</li>
+
+
+
+<li value='3'> <a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/docs/assignments/labs/Lab3.pdf' target="_blank">Convex Sets (PDF)</a> (<a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/website/assignments/labs/Lab3.qmd?raw=true'>Quarto Download</a>)</li>
+
+
+<li value='4'> <a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/docs/assignments/labs/Lab4.pdf' target="_blank">Convex Functions (PDF)</a> (<a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/website/assignments/labs/Lab4.qmd?raw=true'>Quarto Download</a>)</li>
+
+
+<li value='5'> <a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/docs/assignments/labs/Lab5.pdf'>Convex Optimizations Problems</a> (<a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/website/assignments/labs/Lab5.qmd?raw=true'>Download</a>)</li>
+
+<li value='6'> <a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/docs/assignments/labs/Lab6.pdf'>Applications to Statistics and Machine Learning</a> (<a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/website/assignments/labs/Lab6.qmd?raw=true'>Download</a>)</li>
+
+<li value='7'> <a href='https://htmlpreview.github.io/?https://georgehagstrom.github.io/DATA609Spring2025/assignments/labs/Lab7.html'>Nonconvex Optimization and Deep Learning</a> (<a href='https://github.com/georgehagstrom/DATA609Spring2025/blob/main/website/assignments/labs/Lab7.qmd?raw=true'>Download</a>)</li>
+
+</ol>

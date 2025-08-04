@@ -1,0 +1,49 @@
+---
+title: "Module 14: Introduction to Neural Networks"
+editor: source
+---
+
+<!-- 
+See issue with underscores in MathJax equations here: https://gohugo.io/content-management/formats/#issues-with-markdown
+The solution, put backticks (`) around the LaTeX equation
+-->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+### Homework
+
+Homework 7 is due May 18th by midnight
+
+
+### Learning Objectives
+
+* Introduction and Motivation for Neural Networks
+* Introduction to `pytorch`
+
+
+### Readings
+
+
+- Chapter 1 of [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/chap1.html)
+  - Read Chapter 3 if you find it to be a review
+- [Pytorch Basics](https://docs.pytorch.org/tutorials/beginner/basics/intro.html)
+  - The recipes are also good
+- Section 8.5 Introduction to Algorithms for Data Mining and Machine Learning
+
+

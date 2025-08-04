@@ -1,0 +1,40 @@
+---
+title: "Module 15 - Deep Learning Applications"
+editor: source
+---
+
+<!-- 
+See issue with underscores in MathJax equations here: https://gohugo.io/content-management/formats/#issues-with-markdown
+The solution, put backticks (`) around the LaTeX equation
+-->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+### Learning Objectives
+
+* Training Deep Neural Networks
+* Understand the advantages of deep networks for efficienctly representing complex phenomenon
+* Understand vanishing gradients and some mitigation techniques
+
+### Readings
+
+- Chapter 5 and as much of 6 as you have time for of [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/chap5.html)
+  - Read Chapter 6 if you 
+
+- Advanced perspective: Goodfellow [Chapter 11 of the deeplearningbook](https://www.deeplearningbook.org/)

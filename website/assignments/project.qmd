@@ -1,0 +1,44 @@
+---
+title: "Project"
+format: html
+---
+
+# Explore your interests
+
+The idea of this project is for you to find data and do something interesting with it that relates to the skills you have developed in this course.
+
+The project is intentionally open ended- this is an opportunity for you to explore your interests, through using techniques or technologies that branch off those 
+that were introduced in this class, datasets related to problems you face in your career or that you are curious about, or both. 
+
+My expectation for your project is that it has the length and sophistication of a complete homework assignment, but will all the work focused on the topic. It should include an 
+introduction to contextualize the topic, but otherwise you can structure it how you like. 
+
+The output of your project should software that allows me to reproduce your work and a research report which describes what you did with the data and your findings, which could be contained
+within a github repository. 
+
+### Project Proposal
+
+The first step of your project is to submit an initial proposal, which will help to ensure that your project is both worthwhile and feasible in the time frame of the last half of the 
+semester. Your proposal should describe the area that you are interested in, the datasets you are going to use/mathematical problems you want to solve,
+and the link to the topics of this course. The proposal length should be around one page (excluding figures and references), 
+
+The proposal is preliminary, and you can include additional data or a different analysis as needs require. 
+
+## Heilmeier\'s Questions
+
+When writing proposals, I've found the following set of considerations, called "Heilmeier\'s Questions", to be helpful to consider. Although this is just a very short project, you might
+find them helpful as well, and useful for formulating future projects and proposals that you might have to complete. These questions were developed by Dr. George Heilmeier, who
+was the director of DARPA from 1975-1977. Heilmeier said that every proposal to DARPA needed to answer these questions clearly and completely in order to receive funding:
+
+
+1. What are you trying to do? Articulate your objectives using absolutely no jargon. What is the problem?  Why is it hard?
+2. How is it done today, and what are the limits of current practice?
+3. What is new in your approach, and why do you think it will be successful?
+4. Who cares?
+5. If you’re successful, what difference will it make? What applications are enabled as a result?
+6. What are the risks?
+7. How long will it take?
+8. What are the midterm and final “exams” to check for success? How will progress be measured? 
+
+
+

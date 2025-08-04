@@ -1,0 +1,60 @@
+---
+title: "Module 13: Local Optimization Algorithms"
+editor: source
+---
+
+<!-- 
+See issue with underscores in MathJax equations here: https://gohugo.io/content-management/formats/#issues-with-markdown
+The solution, put backticks (`) around the LaTeX equation
+-->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+### Homework
+
+Homework 7 is due in two weeks, Sunday at midnight
+
+
+### Learning Objectives
+
+
+* Neural Network Learning
+* Gradient Descent
+* Convergence Rates and Condition Number
+* Acceleration Using Momentum
+
+
+### Readings
+
+- Chapter 8.1 to 8.4 of Intro to Optimization Algorithms
+- [Wikipedia article on SGD](https://en.wikipedia.org/wiki/Stochastic_gradient_descent) Covers everything but good level
+- [Pankaj Mehta's Notebook](https://physics.bu.edu/~pankajm/ML-Notebooks/HTML/NB2_CIV-gradient_descent.html) I followed his notebook partially here
+- [Deep Learning Book 8.3](https://www.deeplearningbook.org/contents/optimization.html) Parts of this chapter are very advanced
+- Gilbert Strang's Linear Algebra and Learning from Data VI.4 and VI.5 Advanced and Scatterbrained, covers too much, but has deep insights
+- [Accompanying Lectures 22-26 on this playlist](https://www.youtube.com/playlist?list=PL72iHQ8EMDY4Nhu8QciS44ZSDbtTTu0bI)
+
+
+
+
+
+
+
+
+
+
+
